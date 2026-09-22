@@ -1,5 +1,32 @@
 ---
-import { siteContent } from '../../data/site'; import ArrowIcon from '../ui/ArrowIcon.astro'; import IdentityCard from '../cards/IdentityCard.astro'; import SectionLabel from '../ui/SectionLabel.astro';
+import { siteContent } from '../../data/site';
+import ArrowIcon from '../ui/ArrowIcon.astro';
+import IdentityCard from '../cards/IdentityCard.astro';
+import SectionLabel from '../ui/SectionLabel.astro';
 const { about } = siteContent;
 ---
-<section class="about section-light" id="esencia" aria-labelledby="about-title"><div class="container"><SectionLabel number="01" label={about.label} theme="light" /><div class="about-grid"><div><h2 id="about-title">{about.title.map((line) => <span>{line}</span>)}</h2><div class="about-copy">{about.paragraphs.map((paragraph) => <p>{paragraph}</p>)}<a href="#adn" class="text-link">{about.linkLabel}<ArrowIcon /></a></div></div><IdentityCard label={about.cardLabel} footer={about.cardFooter} /></div></div></section>
+
+<section class="about section-light" id="esencia" aria-labelledby="about-title">
+  <div class="container">
+    <SectionLabel number="01" label={about.label} theme="light" />
+    <div class="about-grid">
+      <div>
+        <h2 id="about-title">
+          {about.title.map((line) => (
+            <span>{line}</span>
+          ))}
+        </h2>
+        <div class="about-copy">
+          {about.paragraphs.map((paragraph) => (
+            <p>{paragraph}</p>
+          ))}
+          <a href="#adn" class="text-link">
+            {about.linkLabel}
+            <ArrowIcon />
+          </a>
+        </div>
+      </div>
+      <IdentityCard label={about.cardLabel} footer={about.cardFooter} />
+    </div>
+  </div>
+</section>

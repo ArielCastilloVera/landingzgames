@@ -1,7 +1,15 @@
 ---
 import ArrowIcon from './ArrowIcon.astro';
-interface Props { label: string; href?: string; variant?: 'primary' | 'dark'; }
+interface Props {
+  label: string;
+  href?: string;
+  variant?: 'primary' | 'dark';
+}
 const { label, href, variant = 'primary' } = Astro.props;
 const Tag = href ? 'a' : 'button';
 ---
-<Tag class:list={['button', `button--${variant}`]} href={href} type={href ? undefined : 'button'}><span>{label}</span><ArrowIcon /></Tag>
+
+<Tag class:list={['button', `button--${variant}`]} href={href} type={href ? undefined : 'button'}>
+  <span>{label}</span>
+  <ArrowIcon />
+</Tag>

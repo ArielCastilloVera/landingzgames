@@ -38,7 +38,6 @@
 - Añadir tipografías, logo e imágenes oficiales.
 - Comparar visualmente contra el PDF y la propuesta HTML.
 
-
 ## Protocolo de errores
 
 Si un patch falla, no se apila otro encima: se inspecciona el estado, se vuelve al estado previo al intento y se aplica una solución independiente.

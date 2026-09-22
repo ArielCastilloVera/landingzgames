@@ -1,0 +1,5 @@
+---
+import ArrowIcon from '../ui/ArrowIcon.astro';
+interface Props { label: string; caption: string; tone: 'lime' | 'ink'; } const { label, caption, tone } = Astro.props;
+---
+<figure class="portfolio-card"><div class:list={['portfolio-card__visual', `portfolio-card__visual--${tone}`]}><span>{label}</span><div class="portfolio-card__shape"></div></div><figcaption><span>{caption}</span><ArrowIcon /></figcaption></figure>

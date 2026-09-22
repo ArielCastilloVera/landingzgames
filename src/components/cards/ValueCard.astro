@@ -1,0 +1,5 @@
+---
+import ArrowIcon from '../ui/ArrowIcon.astro';
+interface Props { number: string; title: string; body: string; } const { number, title, body } = Astro.props;
+---
+<article class="value-card"><div class="value-card__top"><span>{number}</span><ArrowIcon /></div><h3>{title}</h3><p>{body}</p></article>

@@ -1,0 +1,5 @@
+---
+interface Props { number: string; label: string; theme?: 'dark' | 'light'; }
+const { number, label, theme = 'dark' } = Astro.props;
+---
+<div class:list={['section-label', `section-label--${theme}`]}><span class="section-label__number">{number}</span><span>{label}</span></div>

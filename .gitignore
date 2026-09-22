@@ -22,3 +22,15 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# Codex and Gentle AI managed workspace configuration
+.codex/
+.atl/
+.gga/
+
+# Engram local memory and runtime artifacts
+.engram/
+engram/
+
+# Local design references
+/design/

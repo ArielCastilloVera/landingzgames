@@ -1,0 +1,5 @@
+---
+import { siteContent } from '../../data/site'; import ArrowIcon from '../ui/ArrowIcon.astro'; import Button from '../ui/Button.astro';
+const { hero } = siteContent;
+---
+<section class="hero" id="inicio" aria-labelledby="hero-title"><div class="container"><div class="hero-eyebrow"><span><i></i>{hero.eyebrow}</span><span>{hero.context}</span></div><div class="hero-stage"><h1 id="hero-title">{hero.title.map((line) => <span>{line}</span>)}</h1><div class="hero-pattern" aria-hidden="true"></div><div class="hero-visual"><div class="hero-visual__orb"></div><span>{hero.visualLabel}</span><strong>Z</strong></div></div><div class="hero-bottom"><div class="hero-copy"><strong>{hero.lead}</strong><p>{hero.body}</p></div><div class="hero-actions"><Button label={hero.primaryAction} href="#contacto" /><a href="#universo" class="text-link">{hero.secondaryAction}<ArrowIcon /></a></div></div><div class="hero-index"><span>UNA MARCA CON ACTITUD. UNA VISIÓN HACIA ADELANTE.</span><a href="#adn">EXPLORA ZGAMES <ArrowIcon /></a></div></div></section>

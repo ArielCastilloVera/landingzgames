@@ -1,0 +1,16 @@
+---
+import { siteContent } from '../../data/site';
+import BrandMark from '../ui/BrandMark.astro';
+import Button from '../ui/Button.astro';
+---
+<header class="site-header"><div class="container header-inner">
+	<a class="brand-link" href="#inicio" aria-label={`${siteContent.brand.name}, inicio`}><BrandMark /><span>{siteContent.brand.name.toLowerCase()}</span></a>
+	<button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-navigation"><span></span><span></span><span class="sr-only">Abrir menú</span></button>
+	<nav id="main-navigation" class="main-navigation" aria-label="Navegación principal">{siteContent.navigation.map((item) => <a href={item.href}>{item.label}</a>)}<Button label="Hablemos" href="#contacto" /></nav>
+</div></header>
+<script>
+	const header = document.querySelector('.site-header'); const toggle = header?.querySelector<HTMLButtonElement>('.menu-toggle'); const navigation = header?.querySelector<HTMLElement>('.main-navigation');
+	function closeMenu() { navigation?.classList.remove('is-open'); toggle?.setAttribute('aria-expanded', 'false'); }
+	toggle?.addEventListener('click', () => { const isOpen = navigation?.classList.toggle('is-open') ?? false; toggle.setAttribute('aria-expanded', String(isOpen)); });
+	navigation?.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeMenu)); document.addEventListener('keydown', (event) => { if (event.key === 'Escape') closeMenu(); });
+</script>

@@ -1,0 +1,50 @@
+---
+import { siteContent } from '../../data/site';
+import ArrowIcon from '../ui/ArrowIcon.astro';
+const { hero } = siteContent;
+---
+
+<section class="hero" id="top" aria-labelledby="hero-title">
+  <div class="container hero-layout">
+    <div class="hero-copy">
+      <p class="eyebrow">
+        <span class="status-dot"></span>
+        {hero.eyebrow}
+      </p>
+      <h1 id="hero-title">{hero.title}</h1>
+      <p class="hero-description">{hero.body}</p>
+      <div class="hero-actions">
+        <a class="button" href="#contact">
+          {hero.primaryAction}
+        </a>
+        <a class="text-link" href="#ecosystem">
+          {hero.secondaryAction}
+          <ArrowIcon direction="down-right" />
+        </a>
+      </div>
+    </div>
+    <figure class="hero-image">
+      <img
+        src="/images/football-journey.jpg"
+        alt="A football player moving with the ball across a lit stadium pitch"
+        width="1600"
+        height="900"
+        fetchpriority="high"
+      />
+      <figcaption>
+        <span>{hero.imageCaption}</span>
+        <span>{hero.imageCredit}</span>
+      </figcaption>
+    </figure>
+  </div>
+  <div class="container hero-note">
+    {hero.highlights.map((highlight, index) => (
+      <Fragment>
+        <span>{highlight}</span>
+        {index < hero.highlights.length - 1 && (
+          <span class="hero-note-line" aria-hidden="true"></span>
+        )}
+      </Fragment>
+    ))}
+  </div>
+</section>

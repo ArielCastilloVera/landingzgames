@@ -1,22 +1,4 @@
-:root {
-  color-scheme: dark;
-  font-family: Arial, Helvetica, sans-serif;
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-
-  --color-black: #050505;
-  --color-paper: #e5e5e5;
-  --color-green: #42c148;
-  --color-muted: #a4a4a4;
-  --color-line: #343434;
-  --color-panel: #111311;
-  --content-width: 1240px;
-  --page-gutter: clamp(20px, 5vw, 72px);
-  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-
+@import './tokens.css';
 *,
 *::before,
 *::after {
@@ -96,7 +78,7 @@ figure {
   position: sticky;
   top: 0;
   z-index: 10;
-  background: rgb(5 5 5 / 94%);
+  background: var(--color-header-overlay);
   backdrop-filter: blur(12px);
 }
 
@@ -134,6 +116,14 @@ figure {
 
 .navigation-toggle {
   display: none;
+}
+
+.navigation-toggle svg,
+.text-link svg,
+.back-to-top svg {
+  width: 18px;
+  height: 18px;
+  color: var(--color-green);
 }
 
 .navigation-menu:not([open]) > .main-navigation {
@@ -272,14 +262,14 @@ figure {
 .hero-image {
   position: relative;
   min-width: 0;
-  border: 1px solid #242924;
-  background: #0a160a;
+  border: 1px solid var(--color-border-dark);
+  background: var(--color-green-panel);
 }
 
 .hero-image::after {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, transparent 50%, rgb(0 0 0 / 45%));
+  background: linear-gradient(180deg, transparent 50%, var(--color-overlay));
   content: '';
   pointer-events: none;
 }
@@ -349,17 +339,17 @@ figure {
 
 .section-intro {
   max-width: 450px;
-  color: #555;
+  color: var(--color-dark-muted);
   font-size: 14px;
   line-height: 1.75;
 }
 
 .ecosystem-map {
   padding: clamp(20px, 4vw, 46px);
-  border: 1px solid #c4c8c3;
+  border: 1px solid var(--color-grid-border);
   background:
-    linear-gradient(90deg, transparent 49.9%, rgb(5 5 5 / 7%) 50%, transparent 50.1%),
-    linear-gradient(0deg, transparent 49.9%, rgb(5 5 5 / 7%) 50%, transparent 50.1%);
+    linear-gradient(90deg, transparent 49.9%, var(--color-grid-line) 50%, transparent 50.1%),
+    linear-gradient(0deg, transparent 49.9%, var(--color-grid-line) 50%, transparent 50.1%);
 }
 
 .ecosystem-map__axis {
@@ -367,7 +357,7 @@ figure {
   justify-content: space-between;
   gap: 20px;
   margin-bottom: 18px;
-  color: #666;
+  color: var(--color-axis-muted);
   font-size: 9px;
   font-weight: 700;
   letter-spacing: 1px;
@@ -383,8 +373,8 @@ figure {
 .ecosystem-card {
   min-height: 218px;
   padding: 18px;
-  border: 1px solid #b7bcb7;
-  background: rgb(255 255 255 / 70%);
+  border: 1px solid var(--color-card-border);
+  background: var(--color-card-background);
 }
 
 .ecosystem-card--players {
@@ -392,22 +382,22 @@ figure {
 }
 
 .ecosystem-card--operation {
-  border-top: 4px solid #111;
+  border-top: 4px solid var(--color-operator-accent);
 }
 
 .ecosystem-card--engagement {
-  border-top: 4px solid #8a8a8a;
+  border-top: 4px solid var(--color-engagement-accent);
 }
 
 .ecosystem-card--insight {
-  border-top: 4px solid #b9d9bb;
+  border-top: 4px solid var(--color-insight-accent);
 }
 
 .ecosystem-card__top {
   display: flex;
   justify-content: space-between;
   gap: 12px;
-  color: #666;
+  color: var(--color-axis-muted);
   font-size: 9px;
   font-weight: 700;
   letter-spacing: 0.8px;
@@ -426,15 +416,15 @@ figure {
   min-height: 36px;
   align-items: center;
   padding: 7px 10px;
-  border: 1px solid #d2d5d1;
-  background: white;
+  border: 1px solid var(--color-chip-border);
+  background: var(--color-white);
   font-size: 12px;
   font-weight: 700;
 }
 
 .ecosystem-card p {
   margin-top: 16px;
-  color: #555;
+  color: var(--color-dark-muted);
   font-size: 11px;
   line-height: 1.6;
 }
@@ -442,19 +432,19 @@ figure {
 .ecosystem-card .development-note {
   display: inline-block;
   margin-top: 8px;
-  color: #235f28;
+  color: var(--color-development);
   font-size: 10px;
   font-weight: 700;
 }
 
 .diagram-note {
   margin-top: 16px;
-  color: #666;
+  color: var(--color-axis-muted);
   font-size: 10px;
 }
 
 .journey-section {
-  background: #0b0c0b;
+  background: var(--color-journey-background);
 }
 
 .journey-section .section-heading {
@@ -473,7 +463,7 @@ figure {
   position: relative;
   min-width: 0;
   padding: 24px 18px 4px 0;
-  border-top: 1px solid #595c58;
+  border-top: 1px solid var(--color-journey-line);
 }
 
 .journey-step:not(:last-child)::after {
@@ -507,21 +497,21 @@ figure {
 }
 
 .capabilities-section {
-  background: #151715;
+  background: var(--color-capability-background);
 }
 
 .capability-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  border-top: 1px solid #414441;
-  border-left: 1px solid #414441;
+  border-top: 1px solid var(--color-capability-line);
+  border-left: 1px solid var(--color-capability-line);
 }
 
 .capability-card {
   min-height: 245px;
   padding: clamp(22px, 4vw, 42px);
-  border-right: 1px solid #414441;
-  border-bottom: 1px solid #414441;
+  border-right: 1px solid var(--color-capability-line);
+  border-bottom: 1px solid var(--color-capability-line);
 }
 
 .capability-card__number {
@@ -554,7 +544,7 @@ figure {
   gap: 40px;
   margin-top: 70px;
   padding-top: 32px;
-  border-top: 1px solid #414441;
+  border-top: 1px solid var(--color-capability-line);
 }
 
 .partner-panel h3 {
@@ -584,7 +574,7 @@ figure {
 
 .partner-list li {
   padding: 15px 12px;
-  border: 1px solid #464946;
+  border: 1px solid var(--color-partner-border);
   color: var(--color-paper);
   font-size: 11px;
 }
@@ -604,7 +594,7 @@ figure {
 
 .contact-section .eyebrow {
   margin-bottom: 24px;
-  color: #1b451d;
+  color: var(--color-contact-ink);
 }
 
 .contact-section .section-number {
@@ -699,12 +689,23 @@ figure {
   }
 
   .navigation-toggle {
-    display: block;
-    padding: 10px 0 10px 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: 1px solid var(--color-line);
+    background: transparent;
+    color: var(--color-paper);
     font-size: 12px;
     font-weight: 700;
     list-style: none;
     cursor: pointer;
+  }
+
+  .navigation-toggle::marker {
+    content: '';
   }
 
   .navigation-toggle::-webkit-details-marker {

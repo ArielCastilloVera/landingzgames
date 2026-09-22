@@ -1,0 +1,43 @@
+---
+import { siteContent } from '../../data/site';
+const { ecosystem } = siteContent;
+---
+
+<section class="section ecosystem-section" id="ecosystem" aria-labelledby="ecosystem-title">
+  <div class="container">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">
+          <span class="section-number">01</span>
+          {ecosystem.eyebrow}
+        </p>
+        <h2 id="ecosystem-title">{ecosystem.title}</h2>
+      </div>
+      <p class="section-intro">{ecosystem.intro}</p>
+    </div>
+    <div class="ecosystem-map" aria-label={ecosystem.mapLabel}>
+      <div class="ecosystem-map__axis" aria-hidden="true">
+        <span>{ecosystem.axisStart}</span>
+        <span>{ecosystem.axisEnd}</span>
+      </div>
+      <div class="ecosystem-groups">
+        {ecosystem.groups.map((group) => (
+          <article class:list={['ecosystem-card', `ecosystem-card--${group.id}`]}>
+            <div class="ecosystem-card__top">
+              <span>{group.number}</span>
+              <span>{group.name}</span>
+            </div>
+            <div class="product-list">
+              {group.products.map((product) => (
+                <span class="product-chip">{product.name}</span>
+              ))}
+            </div>
+            <p>{group.description}</p>
+            {group.note && <small class="development-note">{group.note}</small>}
+          </article>
+        ))}
+      </div>
+      <p class="diagram-note">{ecosystem.diagramNote}</p>
+    </div>
+  </div>
+</section>

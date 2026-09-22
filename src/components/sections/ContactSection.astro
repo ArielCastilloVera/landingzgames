@@ -1,0 +1,25 @@
+---
+import { siteContent } from '../../data/site';
+import ArrowIcon from '../ui/ArrowIcon.astro';
+const { contact } = siteContent;
+---
+
+<section class="contact-section" id="contact" aria-labelledby="contact-title">
+  <div class="container contact-layout">
+    <div>
+      <p class="eyebrow">
+        <span class="section-number">04</span>
+        {contact.eyebrow}
+      </p>
+      <h2 id="contact-title">{contact.title}</h2>
+    </div>
+    <div class="contact-copy">
+      <p>{contact.body}</p>
+      <p>{contact.prompt}</p>
+      <a class="text-link" href="#ecosystem">
+        {contact.action}
+        <ArrowIcon direction="up-right" />
+      </a>
+    </div>
+  </div>
+</section>

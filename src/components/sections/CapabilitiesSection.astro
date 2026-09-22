@@ -1,0 +1,47 @@
+---
+import { siteContent } from '../../data/site';
+const { capabilities, partners } = siteContent;
+---
+
+<section
+  class="section capabilities-section"
+  id="capabilities"
+  aria-labelledby="capabilities-title"
+>
+  <div class="container">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">
+          <span class="section-number">03</span>
+          {capabilities.eyebrow}
+        </p>
+        <h2 id="capabilities-title">{capabilities.title}</h2>
+      </div>
+      <p class="section-intro">{capabilities.intro}</p>
+    </div>
+    <div class="capability-grid">
+      {capabilities.items.map((item) => (
+        <article class="capability-card">
+          <span class="capability-card__number">{item.number}</span>
+          <h3>{item.name}</h3>
+          <p class="capability-card__products">
+            {item.products.map((product) => product.name).join(' · ')}
+          </p>
+          <p class="capability-card__description">{item.description}</p>
+        </article>
+      ))}
+    </div>
+    <div class="partner-panel">
+      <div>
+        <p class="eyebrow">{partners.eyebrow}</p>
+        <h3>{partners.title}</h3>
+        <p>{partners.intro}</p>
+      </div>
+      <ul class="partner-list">
+        {partners.categories.map((category) => (
+          <li>{category}</li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</section>

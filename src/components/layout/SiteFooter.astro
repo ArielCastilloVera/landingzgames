@@ -1,28 +1,18 @@
 ---
 import { siteContent } from '../../data/site';
-import BrandMark from '../ui/BrandMark.astro';
 import ArrowIcon from '../ui/ArrowIcon.astro';
+const { brand, footer } = siteContent;
 ---
 
 <footer class="site-footer">
-  <div class="container">
-    <div class="footer-main">
-      <a
-        class="brand-link"
-        href="#inicio"
-        aria-label={`${siteContent.brand.name}, volver al inicio`}
-      >
-        <BrandMark />
-        <span>{siteContent.brand.name.toLowerCase()}</span>
-      </a>
-      <p>{siteContent.brand.tagline}</p>
-      <a class="back-top" href="#inicio">
-        Volver arriba <ArrowIcon />
-      </a>
-    </div>
-    <div class="footer-bottom">
-      <span>Propuesta conceptual de landing corporativa. Textos sujetos a validación.</span>
-      <span>ZGAMES / DIRECCIÓN VISUAL 01</span>
-    </div>
+  <div class="container footer-inner">
+    <a class="wordmark" href="#top">
+      {brand.name}
+    </a>
+    <p>{brand.tagline}</p>
+    <a class="back-to-top" href="#top">
+      {footer.backToTop}
+      <ArrowIcon direction="up" />
+    </a>
   </div>
 </footer>

@@ -1,0 +1,33 @@
+:root {
+  --color-black: #050505;
+  --color-paper: #e5e5e5;
+  --color-green: #42c148;
+  --color-muted: #a4a4a4;
+  --color-line: #343434;
+  --color-panel: #111311;
+  --color-header-overlay: rgb(5 5 5 / 94%);
+  --color-border-dark: #242924;
+  --color-green-panel: #0a160a;
+  --color-overlay: rgb(0 0 0 / 45%);
+  --color-dark-muted: #555;
+  --color-grid-border: #c4c8c3;
+  --color-grid-line: rgb(5 5 5 / 7%);
+  --color-axis-muted: #666;
+  --color-card-border: #b7bcb7;
+  --color-card-background: rgb(255 255 255 / 70%);
+  --color-operator-accent: #111;
+  --color-engagement-accent: #8a8a8a;
+  --color-insight-accent: #b9d9bb;
+  --color-chip-border: #d2d5d1;
+  --color-white: #fff;
+  --color-development: #235f28;
+  --color-journey-background: #0b0c0b;
+  --color-journey-line: #595c58;
+  --color-capability-background: #151715;
+  --color-capability-line: #414441;
+  --color-partner-border: #464946;
+  --color-contact-ink: #1b451d;
+  --content-width: 1240px;
+  --page-gutter: clamp(20px, 5vw, 72px);
+  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+}

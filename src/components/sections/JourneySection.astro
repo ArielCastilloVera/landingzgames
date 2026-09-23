@@ -1,5 +1,6 @@
 ---
 import { siteContent } from '../../data/site';
+import BrandIcon from '../ui/BrandIcon.astro';
 const { journey } = siteContent;
 ---
 
@@ -19,6 +20,7 @@ const { journey } = siteContent;
       {journey.steps.map((step) => (
         <li class="journey-step">
           <span class="journey-step__number">{step.number}</span>
+          <BrandIcon name="arrow" className="journey-step__arrow" width={15} height={18} />
           <h3>{step.title}</h3>
           <p>{step.detail}</p>
         </li>

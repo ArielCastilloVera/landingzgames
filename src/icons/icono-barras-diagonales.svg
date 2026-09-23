@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 556 172" role="img" aria-labelledby="title">
+  <title id="title">Icono de barras diagonales</title>
+  <g fill="#54C443">
+    <path d="M139 0h7L7 172H0z"/>
+    <path d="M161 0h8L31 172h-9z"/>
+    <path d="M186 0h11L59 172H47z"/>
+    <path d="M215 0h14L91 172H76z"/>
+    <path d="M246 0h26L134 172h-26z"/>
+    <path d="M288 0h33L183 172h-33z"/>
+    <path d="M337 0h46L246 172h-46z"/>
+    <path d="M398 0h64L325 172h-64z"/>
+    <path d="M477 0h79L418 172h-80z"/>
+  </g>
+</svg>

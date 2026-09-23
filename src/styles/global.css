@@ -356,6 +356,32 @@ figure {
   object-position: 62% center;
 }
 
+.hero-image__bars,
+.hero-image__parallelogram,
+.hero-image__arrow {
+  position: absolute;
+  z-index: 2;
+  height: auto;
+}
+
+.hero-image__bars {
+  top: -24px;
+  right: 0;
+  width: min(220px, 45%);
+}
+
+.hero-image__parallelogram {
+  top: 24%;
+  left: -18px;
+  width: 96px;
+}
+
+.hero-image__arrow {
+  right: 14px;
+  bottom: 14px;
+  width: 24px;
+}
+
 .hero-image::after {
   position: absolute;
   inset: 0;
@@ -432,19 +458,28 @@ figure {
 }
 
 .ecosystem-ticker {
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 24px minmax(0, 1fr) 24px minmax(0, 1fr) 24px minmax(0, 1fr);
   align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-  margin: calc(clamp(72px, 9vw, 124px) * -1) calc(var(--page-gutter) * -1) 70px;
+  justify-items: center;
+  column-gap: clamp(8px, 1vw, 18px);
+  width: 100vw;
+  margin: calc(clamp(72px, 9vw, 124px) * -1) calc(50% - 50vw) 70px;
   padding: 20px var(--page-gutter);
   overflow: hidden;
   background: var(--color-green);
   color: var(--color-black);
-  font-size: 14px;
+  font-size: clamp(12px, 1vw, 16px);
   font-weight: 700;
   letter-spacing: 1.2px;
-  white-space: nowrap;
+  text-align: center;
+}
+
+.ecosystem-ticker__icon {
+  width: 20px;
+  height: 25px;
+  flex: 0 0 auto;
+  object-fit: contain;
 }
 
 .section-heading {
@@ -566,11 +601,18 @@ figure {
   text-transform: uppercase;
 }
 
+.ecosystem-card__mark {
+  width: 42px;
+  height: 14px;
+  margin: 12px 0 0 auto;
+  object-fit: fill;
+}
+
 .product-list {
   display: flex;
   flex-wrap: wrap;
   gap: 7px;
-  margin-top: 28px;
+  margin-top: 14px;
 }
 
 .product-chip {
@@ -632,22 +674,19 @@ figure {
   border-top: 1px solid var(--color-journey-line);
 }
 
-.journey-step:not(:last-child)::after {
-  position: absolute;
-  top: -4px;
-  right: 18px;
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--color-green);
-  content: '';
-}
-
 .journey-step__number {
   color: var(--color-green);
   font-size: 10px;
   font-weight: 700;
   letter-spacing: 1px;
+}
+
+.journey-step__arrow {
+  display: inline-block;
+  width: 15px;
+  height: 18px;
+  margin-left: 9px;
+  vertical-align: middle;
 }
 
 .journey-step h3 {
@@ -992,6 +1031,22 @@ figure {
     aspect-ratio: 1.26 / 1;
   }
 
+  .hero-image__bars {
+    top: -14px;
+    width: min(160px, 42%);
+  }
+
+  .hero-image__parallelogram {
+    left: -8px;
+    width: 64px;
+  }
+
+  .hero-image__arrow {
+    right: 10px;
+    bottom: 10px;
+    width: 20px;
+  }
+
   .hero-index {
     gap: 12px 20px;
     font-size: 9px;
@@ -1013,12 +1068,20 @@ figure {
   }
 
   .ecosystem-ticker {
-    width: calc(100% + var(--page-gutter) * 2);
-    justify-content: flex-start;
-    gap: 16px;
+    grid-template-columns: minmax(0, 1fr) 12px minmax(0, 1fr) 12px minmax(0, 1fr) 12px minmax(
+        0,
+        1fr
+      );
+    column-gap: 4px;
     margin-top: -66px;
     margin-bottom: 50px;
     font-size: 11px;
+    line-height: 1.2;
+  }
+
+  .ecosystem-ticker__icon {
+    width: 10px;
+    height: 13px;
   }
 
   .section-heading {

@@ -1,5 +1,6 @@
 ---
 import { siteContent } from '../../data/site';
+import BrandIcon from '../ui/BrandIcon.astro';
 const { ecosystem } = siteContent;
 ---
 
@@ -7,11 +8,11 @@ const { ecosystem } = siteContent;
   <div class="container">
     <div class="ecosystem-ticker" aria-label="Connected gaming ecosystem">
       <span>PLAYERS</span>
-      <span aria-hidden="true">✳</span>
+      <BrandIcon name="sum" className="ecosystem-ticker__icon" />
       <span>OPERATORS</span>
-      <span aria-hidden="true">✳</span>
+      <BrandIcon name="sum" className="ecosystem-ticker__icon" />
       <span>SUPPLIERS</span>
-      <span aria-hidden="true">✳</span>
+      <BrandIcon name="sum" className="ecosystem-ticker__icon" />
       <span>CONNECTED EXPERIENCES</span>
     </div>
     <div class="section-heading">
@@ -48,6 +49,7 @@ const { ecosystem } = siteContent;
               <span>{group.number}</span>
               <span>{group.name}</span>
             </div>
+            <BrandIcon name="parallelogram" className="ecosystem-card__mark" />
             <div class="product-list">
               {group.products.map((product) => (
                 <span class="product-chip">{product.name}</span>

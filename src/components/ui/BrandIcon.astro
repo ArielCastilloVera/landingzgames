@@ -1,0 +1,30 @@
+---
+import type { BrandIconProps, BrandIconName } from '../../types/components';
+import sumIcon from '../../icons/iconosuma.svg?url';
+import parallelogramIcon from '../../icons/icono-paralelogramo.svg?url';
+import arrowIcon from '../../icons/icono-flecha-derecha.svg?url';
+import diagonalBarsIcon from '../../icons/icono-barras-diagonales.svg?url';
+
+type Props = BrandIconProps;
+
+const { name, className, width, height } = Astro.props;
+
+const iconAssets: Record<BrandIconName, { src: string; width: number; height: number }> = {
+  sum: { src: sumIcon, width: 20, height: 25 },
+  parallelogram: { src: parallelogramIcon, width: 181, height: 59 },
+  arrow: { src: arrowIcon, width: 54, height: 64 },
+  'diagonal-bars': { src: diagonalBarsIcon, width: 556, height: 172 },
+};
+
+const icon = iconAssets[name];
+---
+
+<img
+  class:list={['brand-icon', className]}
+  src={icon.src}
+  width={width ?? icon.width}
+  height={height ?? icon.height}
+  alt=""
+  aria-hidden="true"
+  decoding="async"
+/>

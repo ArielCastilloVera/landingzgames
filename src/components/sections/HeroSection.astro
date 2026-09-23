@@ -1,16 +1,14 @@
 ---
 import { siteContent } from '../../data/site';
 import ArrowIcon from '../ui/ArrowIcon.astro';
+import BrandIcon from '../ui/BrandIcon.astro';
 const { hero } = siteContent;
 ---
 
 <section class="hero" id="top" aria-labelledby="hero-title">
   <div class="container hero-layout">
     <div class="hero-copy">
-      <p class="eyebrow">
-        <span class="status-dot"></span>
-        {hero.eyebrow}
-      </p>
+      <p class="eyebrow"></p>
       <h1 id="hero-title">{hero.title}</h1>
       <p class="hero-description">{hero.body}</p>
       <div class="hero-actions">

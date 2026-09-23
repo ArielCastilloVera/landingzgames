@@ -27,7 +27,6 @@ export const siteContent = {
     { label: 'Universo Z', href: '#capabilities' },
   ],
   hero: {
-    eyebrow: 'Technology for gaming operators',
     title: 'One ecosystem. Built around the operation.',
     body: 'Explore the products and capabilities across the player experience, operator tools, engagement, ticketing, data and support.',
     primaryAction: 'Discuss your operation',

@@ -3,10 +3,8 @@ import '../styles/global.css';
 import SiteHeader from '../components/layout/SiteHeader.astro';
 import SiteFooter from '../components/layout/SiteFooter.astro';
 import { siteContent } from '../data/site';
-interface Props {
-  title?: string;
-  description?: string;
-}
+import type { SiteLayoutProps } from '../types/components';
+type Props = SiteLayoutProps;
 const { title = siteContent.metadata.title, description = siteContent.metadata.description } =
   Astro.props;
 ---

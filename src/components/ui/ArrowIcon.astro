@@ -1,7 +1,6 @@
 ---
-interface Props {
-  direction?: 'up' | 'up-right' | 'down-right';
-}
+import type { ArrowIconProps } from '../../types/components';
+type Props = ArrowIconProps;
 const { direction = 'up-right' } = Astro.props;
 const paths = {
   up: 'M12 19V5m0 0L6 11m6-6 6 6',

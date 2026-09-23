@@ -1,11 +1,11 @@
 :root {
-  --color-black: #050505;
+  --color-black: #000;
   --color-paper: #e5e5e5;
   --color-green: #42c148;
   --color-muted: #a4a4a4;
   --color-line: #343434;
   --color-panel: #111311;
-  --color-header-overlay: rgb(5 5 5 / 94%);
+  --color-header-overlay: rgb(0 0 0 / 94%);
   --color-border-dark: #242924;
   --color-green-panel: #0a160a;
   --color-overlay: rgb(0 0 0 / 45%);

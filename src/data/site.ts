@@ -13,25 +13,26 @@ const productCatalog = {
 
 export const siteContent = {
   metadata: {
-    title: 'ZGAMES | A connected technology ecosystem',
-    description: 'Explore the ZGames connected technology ecosystem for gaming operators.',
+    title: 'ZGAMES | Technology for connected gaming',
+    description:
+      'Explore the ZGames technology ecosystem for gaming operators, from player-facing products to operational capabilities.',
   },
   brand: {
     name: 'ZGAMES',
-    tagline: 'Technology for connected gaming experiences.',
+    tagline: 'We build to win.',
   },
   navigation: [
-    { label: 'Ecosystem', href: '#ecosystem' },
-    { label: 'Player journey', href: '#journey' },
-    { label: 'Capabilities', href: '#capabilities' },
+    { label: 'Inicio', href: '#top' },
+    { label: 'Nuestro ADN', href: '#ecosystem' },
+    { label: 'Universo Z', href: '#capabilities' },
   ],
   hero: {
-    eyebrow: 'Connected technology for gaming operators',
-    title: 'One ecosystem. More connected experiences.',
-    body: 'ZGames connects players, operators, suppliers and specialist capabilities in one technology view of the operation.',
+    eyebrow: 'Technology for gaming operators',
+    title: 'One ecosystem. Built around the operation.',
+    body: 'Explore the products and capabilities across the player experience, operator tools, engagement, ticketing, data and support.',
     primaryAction: 'Discuss your operation',
     secondaryAction: 'Explore the ecosystem',
-    imageCaption: 'Connected around the player',
+    imageCaption: 'A wider view of the game',
     imageCredit: 'ZGAMES / 01',
     highlights: ['PLAYER EXPERIENCE', 'OPERATOR TOOLS', 'DATA & SUPPORT'],
   },
@@ -39,7 +40,7 @@ export const siteContent = {
     eyebrow: 'The connected ecosystem',
     title: 'Built around the way your operation works.',
     intro:
-      'A clear view of the products and capabilities that support the player experience and day-to-day operation.',
+      'A product view of player-facing experiences, operator tools and specialist capabilities. Availability and integrations depend on each operator’s setup.',
     mapLabel: 'ZGames ecosystem product groups',
     axisStart: 'Player experience',
     axisEnd: 'Operator capabilities',
@@ -65,7 +66,7 @@ export const siteContent = {
         name: 'Engagement, support and payments',
         products: [productCatalog.sortiEngage, productCatalog.zTickets, productCatalog.zPay],
         description: 'Capabilities for engagement, ticketing and payment experiences.',
-        note: 'ZPay is in development.',
+        note: 'ZPay is in development; payment integrations depend on the operator setup.',
       },
       {
         id: 'insight',
@@ -136,7 +137,7 @@ export const siteContent = {
     prompt:
       'Bring the questions that matter to your team: operating model, player journey, existing providers and areas to explore.',
     action: 'Explore the ecosystem first',
-    navAction: 'Talk to our team',
+    navAction: 'Hablemos',
   },
 } as const satisfies {
   ecosystem: { groups: readonly EcosystemGroup[] };

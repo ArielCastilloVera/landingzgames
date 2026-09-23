@@ -5,6 +5,15 @@ const { ecosystem } = siteContent;
 
 <section class="section ecosystem-section" id="ecosystem" aria-labelledby="ecosystem-title">
   <div class="container">
+    <div class="ecosystem-ticker" aria-label="Connected gaming ecosystem">
+      <span>PLAYERS</span>
+      <span aria-hidden="true">✳</span>
+      <span>OPERATORS</span>
+      <span aria-hidden="true">✳</span>
+      <span>SUPPLIERS</span>
+      <span aria-hidden="true">✳</span>
+      <span>CONNECTED EXPERIENCES</span>
+    </div>
     <div class="section-heading">
       <div>
         <p class="eyebrow">
@@ -15,6 +24,18 @@ const { ecosystem } = siteContent;
       </div>
       <p class="section-intro">{ecosystem.intro}</p>
     </div>
+    <figure class="ecosystem-feature">
+      <img
+        src="/images/landing/ecosystem-platform.webp"
+        alt="Conceptual dark sports operations platform displayed on a desktop monitor"
+        width="1672"
+        height="941"
+        loading="lazy"
+      />
+      <figcaption>
+        ECOSYSTEM CONCEPT / ILLUSTRATIVE <span>ZGAMES / 01</span>
+      </figcaption>
+    </figure>
     <div class="ecosystem-map" aria-label={ecosystem.mapLabel}>
       <div class="ecosystem-map__axis" aria-hidden="true">
         <span>{ecosystem.axisStart}</span>

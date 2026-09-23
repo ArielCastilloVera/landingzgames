@@ -1,13 +1,14 @@
 ---
 import { siteContent } from '../../data/site';
+import logo from '../../assets/logos/download.webp';
 import ArrowIcon from '../ui/ArrowIcon.astro';
 const { brand, footer } = siteContent;
 ---
 
 <footer class="site-footer">
   <div class="container footer-inner">
-    <a class="wordmark" href="#top">
-      {brand.name}
+    <a class="brand-logo" href="#top" aria-label={`${brand.name} home`}>
+      <img src={logo.src} alt="" width={logo.width} height={logo.height} loading="lazy" />
     </a>
     <p>{brand.tagline}</p>
     <a class="back-to-top" href="#top">

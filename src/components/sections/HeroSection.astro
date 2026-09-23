@@ -1,16 +1,49 @@
 ---
 import { siteContent } from '../../data/site';
+import backgroundHero from '../../assets/backgrounds/backgroundhero1.webp';
+import heroImage from '../../assets/heroimgs/heroimage.png';
 import ArrowIcon from '../ui/ArrowIcon.astro';
-import BrandIcon from '../ui/BrandIcon.astro';
+
 const { hero } = siteContent;
 ---
 
 <section class="hero" id="top" aria-labelledby="hero-title">
-  <div class="container hero-layout">
-    <div class="hero-copy">
-      <p class="eyebrow"></p>
-      <h1 id="hero-title">{hero.title}</h1>
-      <p class="hero-description">{hero.body}</p>
+  <div class="container">
+    <div class="hero-stage" style={`--hero-pattern: url("${backgroundHero.src}")`}>
+      <div class="hero-stage__pattern" aria-hidden="true"></div>
+      <h1 id="hero-title">
+        <span>BET.</span>
+        <span>PLAY.</span>
+        <span class="hero-title__win">WIN.</span>
+      </h1>
+
+      <figure class="hero-visual">
+        <img
+          src={heroImage.src}
+          alt="Jugador de fútbol remata al arco, rodeado de cuotas deportivas en vivo."
+          width={heroImage.width}
+          height={heroImage.height}
+          fetchpriority="high"
+        />
+        <figcaption class="hero-image-tag">
+          <span>ZGAMES</span> / CREADO PARA LA SIGUIENTE JUGADA
+        </figcaption>
+        <div class="hero-image-corners" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </figure>
+      <span class="hero-stage__index" aria-hidden="true">
+        APUESTAS DEPORTIVAS <b>×</b> ENTRETENIMIENTO
+      </span>
+    </div>
+
+    <div class="hero-bottom">
+      <div class="hero-intro">
+        <strong>Una nueva forma de construir el juego.</strong>
+        <p>{hero.body}</p>
+      </div>
       <div class="hero-actions">
         <a class="button" href="#contact">
           {hero.primaryAction}
@@ -22,42 +55,12 @@ const { hero } = siteContent;
         </a>
       </div>
     </div>
-    <figure class="hero-image">
-      <img
-        src="/images/landing/hero-ecosystem.webp"
-        alt="A night football stadium with the pitch, crowd, and match action illuminated in green"
-        width="1912"
-        height="823"
-        fetchpriority="high"
-      />
-      <figcaption>
-        <span>{hero.imageCaption}</span>
-        <span>{hero.imageCredit}</span>
-      </figcaption>
-    </figure>
-  </div>
-  <nav class="hero-index container" aria-label="Page sections">
-    <a href="#ecosystem">
-      <span>01</span> The ecosystem
-    </a>
-    <a href="#journey">
-      <span>02</span> The player journey
-    </a>
-    <a href="#capabilities">
-      <span>03</span> Operator capabilities
-    </a>
-    <a href="#contact">
-      <span>04</span> Let’s talk
-    </a>
-  </nav>
-  <div class="container hero-note">
-    {hero.highlights.map((highlight, index) => (
-      <Fragment>
-        <span>{highlight}</span>
-        {index < hero.highlights.length - 1 && (
-          <span class="hero-note-line" aria-hidden="true"></span>
-        )}
-      </Fragment>
-    ))}
+
+    <div class="hero-index">
+      <span>DISEÑADO PARA TU OPERACIÓN</span>
+      <a href="#ecosystem">
+        EXPLORAR EL ECOSISTEMA <ArrowIcon direction="down-right" />
+      </a>
+    </div>
   </div>
 </section>

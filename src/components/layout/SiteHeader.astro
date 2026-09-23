@@ -7,7 +7,7 @@ const { brand, navigation, contact } = siteContent;
 
 <header class="site-header">
   <div class="container header-inner">
-    <a class="brand-logo" href="#top" aria-label={`${brand.name} home`}>
+    <a class="brand-logo" href="#top" aria-label={`Volver al inicio de ${brand.name}`}>
       <svg viewBox="894.931 755.488 439.144 125.012" aria-hidden="true" focusable="false">
         <path fill="#e5e5e5" fill-rule="nonzero" d="M1046.542 832.486h15.778v-28.005h-15.778c-3.846 0-5.621 1.775-5.621 5.621v16.763c0 3.747 1.775 5.621 5.621 5.621m-18.045 20.313h28.201c3.649 0 5.622-1.676 5.622-5.226v-12.721l-6.41 7.889c-1.578 1.775-3.452 2.663-5.916 2.663h-9.27c-9.565 0-14.199-4.733-14.199-14.2v-25.441c0-9.565 4.634-14.2 14.199-14.2h9.27c2.464 0 4.338.789 5.916 2.564l6.41 7.889v-10.453h14.397v59.954c0 9.565-4.635 14.2-14.201 14.2h-34.019z" />
         <path fill="#e5e5e5" fill-rule="nonzero" d="M1104.718 832.486h15.778v-28.005h-15.778c-3.846 0-5.62 1.775-5.62 5.621v16.763c0 3.747 1.774 5.621 5.62 5.621m-20.017-26.723c0-9.565 4.634-14.2 14.199-14.2h9.27c2.464 0 4.338.789 5.916 2.564l6.41 7.889v-10.453h14.397v53.841h-14.397v-10.552l-6.41 7.889c-1.578 1.775-3.452 2.663-5.916 2.663h-9.27c-9.565 0-14.199-4.733-14.199-14.2z" />
@@ -22,13 +22,13 @@ const { brand, navigation, contact } = siteContent;
     <details class="navigation-menu" open>
       <summary
         class="navigation-toggle"
-        aria-label="Open navigation menu"
+        aria-label="Abrir menú de navegación"
         aria-expanded="false"
         aria-controls="main-navigation"
       >
         <MenuIcon expanded={false} />
       </summary>
-      <nav class="main-navigation" id="main-navigation" aria-label="Main navigation">
+      <nav class="main-navigation" id="main-navigation" aria-label="Navegación principal">
         {navigation.map((item) => (
           <a href={item.href} aria-current={item.href === '#top' ? 'location' : undefined}>
             {item.label}

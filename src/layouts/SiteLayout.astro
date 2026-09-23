@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import SiteHeader from '../components/layout/SiteHeader.astro';
 import SiteFooter from '../components/layout/SiteFooter.astro';
+import ArrowIcon from '../components/ui/ArrowIcon.astro';
 import { siteContent } from '../data/site';
 import type { SiteLayoutProps } from '../types/components';
 type Props = SiteLayoutProps;
@@ -10,7 +11,7 @@ const { title = siteContent.metadata.title, description = siteContent.metadata.d
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
@@ -20,13 +21,17 @@ const { title = siteContent.metadata.title, description = siteContent.metadata.d
   </head>
   <body>
     <a class="skip-link" href="#main-content">
-      Skip to content
+      Saltar al contenido
     </a>
     <SiteHeader />
     <main id="main-content">
       <slot />
     </main>
     <SiteFooter />
+    <a class="back-to-top back-to-top--floating" href="#top" aria-label="Volver arriba">
+      Volver arriba
+      <ArrowIcon direction="up" />
+    </a>
     <script>
       import { initializeNavigation } from '../scripts/navigation';
       initializeNavigation();

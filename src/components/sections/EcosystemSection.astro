@@ -5,16 +5,16 @@ const { ecosystem } = siteContent;
 ---
 
 <section class="section ecosystem-section" id="ecosystem" aria-labelledby="ecosystem-title">
+  <div class="ecosystem-ticker" aria-label="Ecosistema de juegos conectado">
+    <span>JUGADORES</span>
+    <BrandIcon name="sum" className="ecosystem-ticker__icon" />
+    <span>OPERADORES</span>
+    <BrandIcon name="sum" className="ecosystem-ticker__icon" />
+    <span>PROVEEDORES</span>
+    <BrandIcon name="sum" className="ecosystem-ticker__icon" />
+    <span>EXPERIENCIAS CONECTADAS</span>
+  </div>
   <div class="container">
-    <div class="ecosystem-ticker" aria-label="Connected gaming ecosystem">
-      <span>PLAYERS</span>
-      <BrandIcon name="sum" className="ecosystem-ticker__icon" />
-      <span>OPERATORS</span>
-      <BrandIcon name="sum" className="ecosystem-ticker__icon" />
-      <span>SUPPLIERS</span>
-      <BrandIcon name="sum" className="ecosystem-ticker__icon" />
-      <span>CONNECTED EXPERIENCES</span>
-    </div>
     <div class="section-heading">
       <div>
         <p class="eyebrow">
@@ -28,13 +28,13 @@ const { ecosystem } = siteContent;
     <figure class="ecosystem-feature">
       <img
         src="/images/landing/ecosystem-platform.webp"
-        alt="Conceptual dark sports operations platform displayed on a desktop monitor"
+        alt="Plataforma conceptual de gestión deportiva en una pantalla de escritorio"
         width="1672"
         height="941"
         loading="lazy"
       />
       <figcaption>
-        ECOSYSTEM CONCEPT / ILLUSTRATIVE <span>ZGAMES / 01</span>
+        CONCEPTO DEL ECOSISTEMA / ILUSTRATIVO <span>ZGAMES / 01</span>
       </figcaption>
     </figure>
     <div class="ecosystem-map" aria-label={ecosystem.mapLabel}>

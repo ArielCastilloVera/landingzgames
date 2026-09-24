@@ -1,0 +1,83 @@
+---
+import supportAvatar from '../../assets/supportimg/chat-avatar-zeta.png';
+import { siteContent } from '../../data/site';
+
+const whatsappNumber = siteContent.contact.whatsappNumber;
+---
+
+<div
+  class="contact-widget"
+  data-contact-widget
+  data-whatsapp-number={whatsappNumber}
+  data-edge="right"
+  data-panel-placement="above"
+>
+  <section
+    class="contact-widget__panel"
+    id="contact-widget-panel"
+    role="dialog"
+    aria-labelledby="contact-widget-title"
+    aria-modal="false"
+    hidden
+  >
+    <header class="contact-widget__header">
+      <img class="contact-widget__header-avatar" src={supportAvatar.src} alt="" width="44" height="44" />
+      <div class="contact-widget__identity">
+        <h2 id="contact-widget-title">Zeta · ZGAMES</h2>
+        <p><span aria-hidden="true"></span>Te ayudamos a decidir</p>
+      </div>
+      <button class="contact-widget__close" type="button" aria-label="Cerrar contacto">
+        <span aria-hidden="true">×</span>
+      </button>
+    </header>
+
+    <div class="contact-widget__messages" data-chat-messages aria-live="polite"></div>
+    <div class="contact-widget__choices" data-chat-choices></div>
+  </section>
+
+  <aside
+    class="contact-widget__teaser"
+    data-contact-teaser
+    aria-labelledby="contact-teaser-title"
+    aria-describedby="contact-teaser-description"
+  >
+    <button
+      class="contact-widget__teaser-close"
+      type="button"
+      aria-label="Cerrar mensaje"
+      data-teaser-close
+    >
+      <span aria-hidden="true">×</span>
+    </button>
+    <button class="contact-widget__teaser-open" type="button" data-teaser-open>
+      <strong id="contact-teaser-title">¿Te ayudamos a decidir?</strong>
+      <span id="contact-teaser-description">Te decimos qué servicio te conviene en 2 minutos.</span>
+    </button>
+  </aside>
+
+  <button
+    class="contact-widget__launcher"
+    type="button"
+    aria-label="Abrir chat de contacto. Arrastra para mover."
+    aria-expanded="false"
+    aria-controls="contact-widget-panel"
+  >
+    <span class="contact-widget__bubble">
+      <img
+        class="contact-widget__avatar"
+        src={supportAvatar.src}
+        alt=""
+        width={supportAvatar.width}
+        height={supportAvatar.height}
+        draggable="false"
+      />
+      <span class="contact-widget__status" aria-hidden="true"></span>
+    </span>
+  </button>
+</div>
+
+<script>
+  import { initializeContactWidget } from '../../scripts/contact-widget';
+
+  initializeContactWidget();
+</script>

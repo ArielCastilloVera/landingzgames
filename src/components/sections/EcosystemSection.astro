@@ -1,18 +1,39 @@
 ---
 import { siteContent } from '../../data/site';
 import BrandIcon from '../ui/BrandIcon.astro';
+import altenarLogo from '../../assets/logos/altenar.webp';
+import pragmaticLogo from '../../assets/logos/pragmatic.webp';
+import qtechLogo from '../../assets/logos/qtech.webp';
+import timelessLogo from '../../assets/logos/timeless.webp';
 const { ecosystem } = siteContent;
+const partnerLogos = [
+  { name: 'Altenar', image: altenarLogo },
+  { name: 'Pragmatic Play', image: pragmaticLogo },
+  { name: 'QTech Games', image: qtechLogo },
+  { name: 'Timeless', image: timelessLogo },
+];
+const tickerLogos = Array.from({ length: 4 }, () => partnerLogos).flat();
 ---
 
 <section class="section ecosystem-section" id="ecosystem" aria-labelledby="ecosystem-title">
-  <div class="ecosystem-ticker" aria-label="Ecosistema de juegos conectado">
-    <span>JUGADORES</span>
-    <BrandIcon name="sum" className="ecosystem-ticker__icon" />
-    <span>OPERADORES</span>
-    <BrandIcon name="sum" className="ecosystem-ticker__icon" />
-    <span>PROVEEDORES</span>
-    <BrandIcon name="sum" className="ecosystem-ticker__icon" />
-    <span>EXPERIENCIAS CONECTADAS</span>
+  <div class="ecosystem-ticker" role="region" aria-label="Proveedores del ecosistema" tabindex="0">
+    <div class="ecosystem-ticker__track">
+      {[0, 1].map((copy) => (
+        <div class="ecosystem-ticker__group" aria-hidden={copy === 1 ? 'true' : undefined}>
+          {tickerLogos.map(({ name, image }, index) => (
+            <img
+              class="ecosystem-ticker__logo"
+              src={image.src}
+              alt={copy === 0 && index < partnerLogos.length ? name : ''}
+              width={image.width}
+              height={image.height}
+              loading="eager"
+              decoding="async"
+            />
+          ))}
+        </div>
+      ))}
+    </div>
   </div>
   <div class="container">
     <div class="section-heading">
@@ -64,3 +85,9 @@ const { ecosystem } = siteContent;
     </div>
   </div>
 </section>
+
+<script>
+  import { initializeEcosystemTicker } from '../../scripts/ecosystem-ticker';
+
+  initializeEcosystemTicker();
+</script>

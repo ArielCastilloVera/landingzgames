@@ -130,6 +130,7 @@ export const siteContent = {
   },
   footer: { backToTop: 'Volver arriba' },
   contact: {
+    whatsappNumber: '593992990012',
     eyebrow: 'Para operadores',
     title: 'Conversemos sobre tu operación.',
     body: 'Solicita una demostración de productos y conversemos sobre tu modelo, tus proveedores y tus prioridades.',

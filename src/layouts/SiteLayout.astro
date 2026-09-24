@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import SiteHeader from '../components/layout/SiteHeader.astro';
 import SiteFooter from '../components/layout/SiteFooter.astro';
+import ContactWidget from '../components/layout/ContactWidget.astro';
 import ArrowIcon from '../components/ui/ArrowIcon.astro';
 import { siteContent } from '../data/site';
 import type { SiteLayoutProps } from '../types/components';
@@ -29,9 +30,9 @@ const { title = siteContent.metadata.title, description = siteContent.metadata.d
     </main>
     <SiteFooter />
     <a class="back-to-top back-to-top--floating" href="#top" aria-label="Volver arriba">
-      Volver arriba
       <ArrowIcon direction="up" />
     </a>
+    <ContactWidget />
     <script>
       import { initializeNavigation } from '../scripts/navigation';
       initializeNavigation();

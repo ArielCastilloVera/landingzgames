@@ -8,9 +8,17 @@ import ContactSection from '../components/sections/ContactSection.astro';
 ---
 
 <SiteLayout>
-  <HeroSection />
-  <EcosystemSection />
+  <div class="hero-scroll-track" data-hero-scroll-track>
+    <HeroSection />
+    <EcosystemSection />
+  </div>
   <JourneySection />
   <CapabilitiesSection />
   <ContactSection />
 </SiteLayout>
+
+<script>
+  import { initializeHeroScrollAnimation } from '../scripts/hero-scroll-animation';
+
+  initializeHeroScrollAnimation();
+</script>

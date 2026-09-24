@@ -1,10 +1,12 @@
 ---
 import { siteContent } from '../../data/site';
+import { Picture } from 'astro:assets';
 import BrandIcon from '../ui/BrandIcon.astro';
 import altenarLogo from '../../assets/logos/altenar.webp';
 import pragmaticLogo from '../../assets/logos/pragmatic.webp';
 import qtechLogo from '../../assets/logos/qtech.webp';
 import timelessLogo from '../../assets/logos/timeless.webp';
+import ecosystemPlatform from '../../assets/landing/ecosystem-platform.webp';
 const { ecosystem } = siteContent;
 const partnerLogos = [
   { name: 'Altenar', image: altenarLogo },
@@ -21,13 +23,15 @@ const tickerLogos = Array.from({ length: 4 }, () => partnerLogos).flat();
       {[0, 1].map((copy) => (
         <div class="ecosystem-ticker__group" aria-hidden={copy === 1 ? 'true' : undefined}>
           {tickerLogos.map(({ name, image }, index) => (
-            <img
+            <Picture
               class="ecosystem-ticker__logo"
-              src={image.src}
+              src={image}
+              widths={[160]}
+              sizes="160px"
+              formats={['webp']}
               alt={copy === 0 && index < partnerLogos.length ? name : ''}
-              width={image.width}
-              height={image.height}
-              loading="eager"
+              width={160}
+              loading={copy === 0 && index < partnerLogos.length ? 'eager' : 'lazy'}
               decoding="async"
             />
           ))}
@@ -47,12 +51,15 @@ const tickerLogos = Array.from({ length: 4 }, () => partnerLogos).flat();
       <p class="section-intro">{ecosystem.intro}</p>
     </div>
     <figure class="ecosystem-feature">
-      <img
-        src="/images/landing/ecosystem-platform.webp"
+      <Picture
+        src={ecosystemPlatform}
+        formats={['webp']}
+        widths={[480, 768, 1024, 1440]}
+        sizes="(max-width: 700px) 100vw, 90vw"
         alt="Plataforma conceptual de gestión deportiva en una pantalla de escritorio"
-        width="1672"
-        height="941"
+        width={1440}
         loading="lazy"
+        decoding="async"
       />
       <figcaption>
         CONCEPTO DEL ECOSISTEMA / ILUSTRATIVO <span>ZGAMES / 01</span>

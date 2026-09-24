@@ -1,5 +1,6 @@
 ---
 import { siteContent } from '../../data/site';
+import { Picture } from 'astro:assets';
 import backgroundHero from '../../assets/backgrounds/backgroundhero1.webp';
 import heroImage from '../../assets/heroimgs/heroimage.png';
 import ArrowIcon from '../ui/ArrowIcon.astro';
@@ -18,11 +19,15 @@ const { hero } = siteContent;
       </h1>
 
       <figure class="hero-visual">
-        <img
-          src={heroImage.src}
+        <Picture
+          src={heroImage}
+          formats={['webp']}
+          widths={[480, 768, 1024, 1440]}
+          sizes="(max-width: 700px) 100vw, 64vw"
           alt="Jugador de fútbol remata al arco, rodeado de cuotas deportivas en vivo."
-          width={heroImage.width}
-          height={heroImage.height}
+          width={1440}
+          loading="eager"
+          decoding="async"
           fetchpriority="high"
         />
         <figcaption class="hero-image-tag">

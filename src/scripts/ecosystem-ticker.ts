@@ -14,6 +14,22 @@ export function initializeEcosystemTicker(): void {
     ticker.style.setProperty('--ecosystem-ticker-duration', `${duration}s`);
   };
 
+  const track = ticker.querySelector<HTMLElement>('.ecosystem-ticker__track');
+  let tickerVisible = false;
+  const updatePlayback = () => {
+    if (!track) return;
+    track.style.animationPlayState = tickerVisible && !document.hidden ? 'running' : 'paused';
+  };
+  const visibilityObserver = new IntersectionObserver(
+    ([entry]) => {
+      tickerVisible = entry.isIntersecting;
+      updatePlayback();
+    },
+    { rootMargin: '120px' },
+  );
+  visibilityObserver.observe(ticker);
+  document.addEventListener('visibilitychange', updatePlayback);
+
   updateDuration();
 
   if ('ResizeObserver' in window) {

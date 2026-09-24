@@ -1,5 +1,7 @@
 ---
 import { siteContent } from '../../data/site';
+import { Picture } from 'astro:assets';
+import operatorDashboard from '../../assets/landing/operator-dashboard.webp';
 const { capabilities, partners } = siteContent;
 ---
 
@@ -32,12 +34,15 @@ const { capabilities, partners } = siteContent;
       ))}
     </div>
     <figure class="operator-visual">
-      <img
-        src="/images/landing/operator-dashboard.webp"
+      <Picture
+        src={operatorDashboard}
+        formats={['webp']}
+        widths={[480, 768, 1024, 1440]}
+        sizes="(max-width: 700px) 100vw, 90vw"
         alt="Panel conceptual para operadores, con módulos oscuros de gestión de partidos y actividad de cuentas"
-        width="1672"
-        height="941"
+        width={1440}
         loading="lazy"
+        decoding="async"
       />
       <figcaption>
         ESPACIO DE TRABAJO DEL OPERADOR / VISTA CONCEPTUAL <span>ZGAMES / 03</span>

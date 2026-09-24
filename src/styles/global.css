@@ -322,6 +322,12 @@ figure {
 .hero-scroll-track {
   position: relative;
   isolation: isolate;
+  timeline-scope: --ecosystem-scroll;
+}
+
+#ecosystem {
+  view-timeline-name: --ecosystem-scroll;
+  view-timeline-axis: block;
 }
 
 .hero {
@@ -337,6 +343,28 @@ figure {
   min-height: calc(100vh - var(--site-header-height));
   min-height: calc(100dvh - var(--site-header-height));
   padding-top: 0;
+}
+
+@keyframes hero-scroll-exit {
+  from {
+    transform: scale(1) rotate(0deg);
+  }
+
+  to {
+    transform: scale(0.8) rotate(-5deg);
+  }
+}
+
+@supports (animation-timeline: --ecosystem-scroll) and (animation-range: entry 0% entry 100%) and
+  (timeline-scope: --ecosystem-scroll) {
+  .hero {
+    animation-name: hero-scroll-exit;
+    animation-duration: auto;
+    animation-timing-function: linear;
+    animation-fill-mode: both;
+    animation-timeline: --ecosystem-scroll;
+    animation-range: entry 0% entry 100%;
+  }
 }
 
 .hero > .container {
@@ -662,6 +690,7 @@ figure {
 
 @media (prefers-reduced-motion: reduce) {
   .hero {
+    animation: none;
     transform: none;
     will-change: auto;
   }
@@ -674,6 +703,13 @@ figure {
   font-weight: 700;
   letter-spacing: -0.065em;
   line-height: 0.91;
+}
+
+.journey-section,
+.capabilities-section,
+.contact-section {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 900px;
 }
 
 .section {

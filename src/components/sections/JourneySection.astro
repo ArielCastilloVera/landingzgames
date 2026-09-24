@@ -1,5 +1,7 @@
 ---
 import { siteContent } from '../../data/site';
+import { Picture } from 'astro:assets';
+import customerJourney from '../../assets/landing/customer-journey.webp';
 import BrandIcon from '../ui/BrandIcon.astro';
 const { journey } = siteContent;
 ---
@@ -28,21 +30,24 @@ const { journey } = siteContent;
     </ol>
     <div class="journey-gallery">
       <figure class="journey-gallery__item">
-        <img
-          src="/images/landing/customer-journey.webp"
+        <Picture
+          src={customerJourney}
+          formats={['webp']}
+          widths={[480, 768, 1024, 1440]}
+          sizes="(max-width: 700px) 100vw, 55vw"
           alt="Aficionados llegan juntos a una zona iluminada del estadio"
-          width="1672"
-          height="941"
+          width={1440}
           loading="lazy"
+          decoding="async"
         />
         <figcaption>
           LA EXPERIENCIA DEL JUGADOR <span>CONTEXTO / 01</span>
         </figcaption>
       </figure>
       <p>
-        Este mapa muestra puntos de contacto conectados; no promete una automatización integral.
-        La disponibilidad de productos y las conexiones con proveedores dependen de la
-        configuración de cada operador.
+        Este mapa muestra puntos de contacto conectados; no promete una automatización integral. La
+        disponibilidad de productos y las conexiones con proveedores dependen de la configuración de
+        cada operador.
       </p>
     </div>
   </div>

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" focusable="false" style="position:absolute;width:0;height:0;overflow:hidden">
+  <defs>
+    <image id="logoslabgaming-atlas" href="__LOGO_ATLAS_URL__" xlink:href="__LOGO_ATLAS_URL__" width="8000" height="1040" preserveAspectRatio="none" />
+    <symbol id="ecosystem-logo-01" viewBox="0 0 1510 272"><svg width="1510" height="272" viewBox="45 124 1510 272" overflow="hidden" preserveAspectRatio="none"><use href="#logoslabgaming-atlas" xlink:href="#logoslabgaming-atlas" width="8000" height="1040" /></svg></symbol>
+    <symbol id="ecosystem-logo-02" viewBox="0 0 1510 337"><svg width="1510" height="337" viewBox="1645 91 1510 337" overflow="hidden" preserveAspectRatio="none"><use href="#logoslabgaming-atlas" xlink:href="#logoslabgaming-atlas" width="8000" height="1040" /></svg></symbol>
+    <symbol id="ecosystem-logo-03" viewBox="0 0 1448 430"><svg width="1448" height="430" viewBox="3276 45 1448 430" overflow="hidden" preserveAspectRatio="none"><use href="#logoslabgaming-atlas" xlink:href="#logoslabgaming-atlas" width="8000" height="1040" /></svg></symbol>
+    <symbol id="ecosystem-logo-04" viewBox="0 0 1510 419"><svg width="1510" height="419" viewBox="4845 50 1510 419" overflow="hidden" preserveAspectRatio="none"><use href="#logoslabgaming-atlas" xlink:href="#logoslabgaming-atlas" width="8000" height="1040" /></svg></symbol>
+    <symbol id="ecosystem-logo-05" viewBox="0 0 1510 371"><svg width="1510" height="371" viewBox="6445 74 1510 371" overflow="hidden" preserveAspectRatio="none"><use href="#logoslabgaming-atlas" xlink:href="#logoslabgaming-atlas" width="8000" height="1040" /></svg></symbol>
+    <symbol id="ecosystem-logo-06" viewBox="0 0 1510 424"><svg width="1510" height="424" viewBox="45 568 1510 424" overflow="hidden" preserveAspectRatio="none"><use href="#logoslabgaming-atlas" xlink:href="#logoslabgaming-atlas" width="8000" height="1040" /></svg></symbol>
+    <symbol id="ecosystem-logo-07" viewBox="0 0 526 430"><svg width="526" height="430" viewBox="2137 565 526 430" overflow="hidden" preserveAspectRatio="none"><use href="#logoslabgaming-atlas" xlink:href="#logoslabgaming-atlas" width="8000" height="1040" /></svg></symbol>
+    <symbol id="ecosystem-logo-08" viewBox="0 0 1510 271"><svg width="1510" height="271" viewBox="3245 644 1510 271" overflow="hidden" preserveAspectRatio="none"><use href="#logoslabgaming-atlas" xlink:href="#logoslabgaming-atlas" width="8000" height="1040" /></svg></symbol>
+    <symbol id="ecosystem-logo-09" viewBox="0 0 1510 320"><svg width="1510" height="320" viewBox="4845 620 1510 320" overflow="hidden" preserveAspectRatio="none"><use href="#logoslabgaming-atlas" xlink:href="#logoslabgaming-atlas" width="8000" height="1040" /></svg></symbol>
+  </defs>
+</svg>

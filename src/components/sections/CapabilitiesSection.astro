@@ -3,6 +3,7 @@ import { siteContent } from '../../data/site';
 import { Picture } from 'astro:assets';
 import operatorDashboard from '../../assets/landing/operator-dashboard.webp';
 const { capabilities, partners } = siteContent;
+const capabilityIds = ['players', 'operation', 'engagement', 'insight'];
 ---
 
 <section
@@ -22,8 +23,8 @@ const { capabilities, partners } = siteContent;
       <p class="section-intro">{capabilities.intro}</p>
     </div>
     <div class="capability-grid">
-      {capabilities.items.map((item) => (
-        <article class="capability-card">
+      {capabilities.items.map((item, index) => (
+        <article class="capability-card" id={`capability-${capabilityIds[index]}`}>
           <span class="capability-card__number">{item.number}</span>
           <h3>{item.name}</h3>
           <p class="capability-card__products">

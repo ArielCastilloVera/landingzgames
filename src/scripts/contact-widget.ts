@@ -20,6 +20,7 @@ export function initializeContactWidget(): void {
   const teaser = widget.querySelector<HTMLElement>('[data-contact-teaser]');
   const teaserClose = widget.querySelector<HTMLButtonElement>('[data-teaser-close]');
   const teaserOpen = widget.querySelector<HTMLButtonElement>('[data-teaser-open]');
+  const siteHeader = document.querySelector<HTMLElement>('.site-header');
 
   if (!launcher || !panel || !closeButton || !messages || !choices || !teaser || !teaserClose || !teaserOpen) return;
 
@@ -28,7 +29,7 @@ export function initializeContactWidget(): void {
 
   const getVerticalBounds = (height: number) => {
     return {
-      minTop: 0,
+      minTop: (siteHeader?.getBoundingClientRect().bottom ?? 0) + 8,
       maxTop: window.innerHeight - height,
     };
   };
@@ -40,30 +41,75 @@ export function initializeContactWidget(): void {
     widget.dataset.edge = bounds.left + bounds.width / 2 < window.innerWidth / 2 ? 'left' : 'right';
   };
 
-  const placeWidgetBesideArrow = () => {
-    if (!backToTop) return;
-    const arrowBounds = backToTop.getBoundingClientRect();
-    const widgetBounds = widget.getBoundingClientRect();
+  const getArrowBounds = (): DOMRect | null => {
+    if (!backToTop) return null;
+    const bounds = backToTop.getBoundingClientRect();
     const transform = getComputedStyle(backToTop).transform;
     let translateY = 0;
     if (transform !== 'none') {
       try {
         translateY = new DOMMatrixReadOnly(transform).m42;
       } catch {
-        // Keep the measured box position if the browser cannot parse the transform.
+        // Keep the measured bounds if the browser cannot parse the transform.
       }
     }
-    const untransformedArrowTop = arrowBounds.top - translateY;
-    const top = clamp(
-      untransformedArrowTop + arrowBounds.height - widgetBounds.height,
-      0,
-      window.innerHeight - widgetBounds.height,
+    return new DOMRect(bounds.left, bounds.top - translateY, bounds.width, bounds.height);
+  };
+
+  const overlapsArrow = (left: number, top: number, width: number, height: number) => {
+    const arrowBounds = getArrowBounds();
+    if (!arrowBounds) return false;
+    const gap = 8;
+    return (
+      left < arrowBounds.right + gap &&
+      left + width > arrowBounds.left - gap &&
+      top < arrowBounds.bottom + gap &&
+      top + height > arrowBounds.top - gap
     );
+  };
+
+  let lastValidPosition: { left: number; top: number } | null = null;
+
+  const findNearestFreePosition = (left: number, top: number, width: number, height: number) => {
+    const arrowBounds = getArrowBounds();
+    if (!arrowBounds) return { left, top };
+    const gap = 12;
+    const { minTop, maxTop } = getVerticalBounds(height);
+    const clampPosition = (position: { left: number; top: number }) => ({
+      left: clamp(position.left, 0, window.innerWidth - width),
+      top: clamp(position.top, minTop, maxTop),
+    });
+    const candidates = [
+      { left, top: arrowBounds.top - height - gap },
+      { left: arrowBounds.right + gap, top },
+      { left: arrowBounds.left - width - gap, top },
+      { left, top: arrowBounds.bottom + gap },
+    ]
+      .map(clampPosition)
+      .filter((position) => !overlapsArrow(position.left, position.top, width, height));
+
+    candidates.sort((first, second) => {
+      const firstDistance = (first.left - left) ** 2 + (first.top - top) ** 2;
+      const secondDistance = (second.left - left) ** 2 + (second.top - top) ** 2;
+      return firstDistance - secondDistance;
+    });
+
+    return candidates[0] ?? clampPosition(lastValidPosition ?? { left, top });
+  };
+
+  const placeWidgetBesideArrow = () => {
+    if (!backToTop) return;
+    const arrowBounds = getArrowBounds();
+    if (!arrowBounds) return;
+    const widgetBounds = widget.getBoundingClientRect();
+    const { minTop, maxTop } = getVerticalBounds(widgetBounds.height);
+    const top = clamp(arrowBounds.bottom - widgetBounds.height, minTop, maxTop);
 
     widget.style.top = `${top}px`;
     widget.style.bottom = 'auto';
     widget.style.left = `${widgetBounds.left}px`;
     widget.style.right = 'auto';
+    lastValidPosition = { left: widgetBounds.left, top };
     updateEdge();
   };
 
@@ -98,7 +144,8 @@ export function initializeContactWidget(): void {
     );
 
     if (backToTop?.classList.contains('is-visible')) {
-      const arrowBounds = backToTop.getBoundingClientRect();
+      const arrowBounds = getArrowBounds();
+      if (!arrowBounds) return;
       const overlapsArrow = teaserBounds.left < arrowBounds.right && teaserBounds.right > arrowBounds.left &&
         top < arrowBounds.bottom && top + teaserBounds.height > arrowBounds.top;
       if (overlapsArrow) {
@@ -111,12 +158,18 @@ export function initializeContactWidget(): void {
   const clampWidgetWithinViewport = () => {
     const bounds = widget.getBoundingClientRect();
     const { minTop, maxTop } = getVerticalBounds(bounds.height);
-    const top = clamp(bounds.top, minTop, maxTop);
-    const left = clamp(bounds.left, 0, window.innerWidth - bounds.width);
-    widget.style.top = `${top}px`;
+    let position = {
+      left: clamp(bounds.left, 0, window.innerWidth - bounds.width),
+      top: clamp(bounds.top, minTop, maxTop),
+    };
+    if (overlapsArrow(position.left, position.top, bounds.width, bounds.height)) {
+      position = findNearestFreePosition(position.left, position.top, bounds.width, bounds.height);
+    }
+    widget.style.top = `${position.top}px`;
     widget.style.bottom = 'auto';
-    widget.style.left = `${left}px`;
+    widget.style.left = `${position.left}px`;
     widget.style.right = 'auto';
+    lastValidPosition = position;
     updateEdge();
     updateTeaserPlacement();
   };
@@ -139,38 +192,21 @@ export function initializeContactWidget(): void {
   let pointerOffsetY = 0;
   let isDragging = false;
   let suppressClick = false;
-  let dragScrollFrame = 0;
-  let latestPointerY = 0;
-
-  const autoScrollDuringDrag = () => {
-    dragScrollFrame = 0;
-    if (!isDragging || activePointerId === null) return;
-
-    const edgeSize = 48;
-    const maxSpeed = 18;
-    let scrollDelta = 0;
-    if (latestPointerY < edgeSize) {
-      scrollDelta = -Math.ceil(((edgeSize - latestPointerY) / edgeSize) * maxSpeed);
-    } else if (latestPointerY > window.innerHeight - edgeSize) {
-      scrollDelta = Math.ceil(((latestPointerY - (window.innerHeight - edgeSize)) / edgeSize) * maxSpeed);
-    }
-
-    if (!scrollDelta) return;
-    const previousScrollY = window.scrollY;
-    window.scrollBy(0, scrollDelta);
-    if (window.scrollY !== previousScrollY) {
-      dragScrollFrame = window.requestAnimationFrame(autoScrollDuringDrag);
-    }
-  };
   const moveWidget = (left: number, top: number) => {
     const bounds = widget.getBoundingClientRect();
     const { minTop, maxTop } = getVerticalBounds(bounds.height);
-    widget.style.left = `${clamp(left, 0, window.innerWidth - bounds.width)}px`;
+    const nextLeft = clamp(left, 0, window.innerWidth - bounds.width);
+    const nextTop = clamp(top, minTop, maxTop);
+    if (overlapsArrow(nextLeft, nextTop, bounds.width, bounds.height)) return false;
+
+    widget.style.left = `${nextLeft}px`;
     widget.style.right = 'auto';
-    widget.style.top = `${clamp(top, minTop, maxTop)}px`;
+    widget.style.top = `${nextTop}px`;
     widget.style.bottom = 'auto';
+    lastValidPosition = { left: nextLeft, top: nextTop };
     updateEdge();
     updateTeaserPlacement();
+    return true;
   };
 
   const finishWidgetDrag = () => {
@@ -186,14 +222,12 @@ export function initializeContactWidget(): void {
     pointerStartY = event.clientY;
     pointerOffsetX = event.clientX - bounds.left;
     pointerOffsetY = event.clientY - bounds.top;
-    latestPointerY = event.clientY;
     isDragging = false;
     launcher.setPointerCapture(event.pointerId);
   });
 
   launcher.addEventListener('pointermove', (event: PointerEvent) => {
     if (event.pointerId !== activePointerId) return;
-    latestPointerY = event.clientY;
     const deltaX = event.clientX - pointerStartX;
     const deltaY = event.clientY - pointerStartY;
     if (!isDragging && Math.hypot(deltaX, deltaY) < 7) return;
@@ -201,14 +235,11 @@ export function initializeContactWidget(): void {
     userHasMovedWidget = true;
     widget.classList.add('is-dragging');
     moveWidget(event.clientX - pointerOffsetX, event.clientY - pointerOffsetY);
-    if (!dragScrollFrame) dragScrollFrame = window.requestAnimationFrame(autoScrollDuringDrag);
     event.preventDefault();
   });
 
   const finishPointerInteraction = (event: PointerEvent) => {
     if (event.pointerId !== activePointerId) return;
-    if (dragScrollFrame) window.cancelAnimationFrame(dragScrollFrame);
-    dragScrollFrame = 0;
     if (isDragging) {
       finishWidgetDrag();
       widget.classList.remove('is-dragging');

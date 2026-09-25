@@ -1,39 +1,132 @@
 ---
 import { siteContent } from '../../data/site';
-import { Picture } from 'astro:assets';
-import BrandIcon from '../ui/BrandIcon.astro';
-import altenarLogo from '../../assets/logos/altenar.webp';
-import pragmaticLogo from '../../assets/logos/pragmatic.webp';
-import qtechLogo from '../../assets/logos/qtech.webp';
-import timelessLogo from '../../assets/logos/timeless.webp';
+import { getImage, Picture } from 'astro:assets';
+import logoAtlas from '../../assets/logos/logoslabgaming.png';
+import logoSpriteTemplate from '../../assets/main.svg?raw';
 import ecosystemPlatform from '../../assets/landing/ecosystem-platform.webp';
+import playersImage from '../../assets/landing/imagen1gmb.png';
+import operationImage from '../../assets/landing/imagen2gmb.png';
+import engagementImage from '../../assets/landing/imagen3gmb.png';
+import insightImage from '../../assets/landing/imagen4gmb.png';
+
 const { ecosystem } = siteContent;
-const partnerLogos = [
-  { name: 'Altenar', image: altenarLogo },
-  { name: 'Pragmatic Play', image: pragmaticLogo },
-  { name: 'QTech Games', image: qtechLogo },
-  { name: 'Timeless', image: timelessLogo },
+const ecosystemCardImages = {
+  players: playersImage,
+  operation: operationImage,
+  engagement: engagementImage,
+  insight: insightImage,
+} as const;
+const optimizedLogoAtlas = await getImage({
+  src: logoAtlas,
+  width: 2400,
+  format: 'webp',
+  quality: 82,
+});
+const logoSprite = logoSpriteTemplate.replaceAll('__LOGO_ATLAS_URL__', optimizedLogoAtlas.src);
+const tickerLogos = [
+  'ecosystem-logo-01',
+  'ecosystem-logo-02',
+  'ecosystem-logo-03',
+  'ecosystem-logo-04',
+  'ecosystem-logo-05',
+  'ecosystem-logo-06',
+  'ecosystem-logo-07',
+  'ecosystem-logo-08',
+  'ecosystem-logo-09',
 ];
-const tickerLogos = Array.from({ length: 4 }, () => partnerLogos).flat();
+const capabilityIds = ['players', 'operation', 'engagement', 'insight'];
+const productCardCopy = {
+  Sorti: {
+    description: 'Registro, verificación, apuestas y cuenta en la plataforma del operador.',
+    keyPoints: [
+      'IA para verificar identidad y tutoriales guiados.',
+      'Sportsbook, casino, virtuales y promociones.',
+    ],
+    review: 'Reunir el recorrido del jugador en una misma experiencia facilita su seguimiento.',
+    reviewer: 'Operador · ficticio',
+  },
+  BackOffice: {
+    description: 'Dashboard configurable para administración y control operativo.',
+    keyPoints: [
+      'Usuarios, agentes, roles y promociones.',
+      'Cargas y retiros con QR o código, según el operador.',
+    ],
+    review: 'Configurar el panel y los permisos desde un lugar ordena el trabajo diario.',
+    reviewer: 'Operaciones · ficticio',
+  },
+  SortiEngage: {
+    description: 'Campañas y recorridos de adquisición conectados al registro.',
+    keyPoints: [
+      'Landings y automatizaciones.',
+      'Promociones y comunicaciones al jugador.',
+    ],
+    review: 'Conectar campañas al registro ordena el recorrido desde el primer contacto.',
+    reviewer: 'Marketing · ficticio',
+  },
+  ZTickets: {
+    description: 'CRM de chat empresarial para atención al cliente y gestión de tickets.',
+    keyPoints: [
+      'Solicitudes desde widget, Instagram, Facebook y WhatsApp.',
+      'Asignación al equipo ATC y seguimiento de estado.',
+    ],
+    review: 'Asignar tickets y revisar su estado ordena el seguimiento de solicitudes.',
+    reviewer: 'Atención · ficticio',
+  },
+  ZPay: {
+    description: 'Capa de pagos y movimientos para la operación. Producto en desarrollo.',
+    keyPoints: [
+      'Integraciones según la configuración del operador.',
+      'Disponibilidad sujeta a configuración.',
+    ],
+    review: 'Conectar pagos con la operación responde a una necesidad del equipo.',
+    reviewer: 'Operador · ficticio',
+  },
+  'Science 365': {
+    description: 'Indicadores de jugadores, apuestas, marketing, pagos y atención.',
+    keyPoints: [
+      'Segmentación, calidad de atención y rentabilidad.',
+      'Alertas y vistas adaptables.',
+    ],
+    review: 'Ver indicadores de distintas áreas ayuda a entender mejor la operación.',
+    reviewer: 'Analítica · ficticio',
+  },
+  Center: {
+    description: 'Información administrativa y financiera conectada a la operación.',
+    keyPoints: [
+      'Cierres, conciliación y comisiones.',
+      'Lectura conjunta con Science 365.',
+    ],
+    review: 'Cruzar cierres y conciliación con datos financieros ordena las revisiones.',
+    reviewer: 'Finanzas · ficticio',
+  },
+} as const;
+const productCards = ecosystem.groups.flatMap((group, groupIndex) =>
+  group.products.map((product) => ({
+    ...productCardCopy[product.name as keyof typeof productCardCopy],
+    group,
+    groupIndex,
+    product,
+  })),
+);
 ---
 
 <section class="section ecosystem-section" id="ecosystem" aria-labelledby="ecosystem-title">
   <div class="ecosystem-ticker" role="region" aria-label="Proveedores del ecosistema" tabindex="0">
+    <Fragment set:html={logoSprite} />
     <div class="ecosystem-ticker__track">
       {[0, 1].map((copy) => (
         <div class="ecosystem-ticker__group" aria-hidden={copy === 1 ? 'true' : undefined}>
-          {tickerLogos.map(({ name, image }, index) => (
-            <Picture
+          {tickerLogos.map((logoId) => (
+            <svg
               class="ecosystem-ticker__logo"
-              src={image}
-              widths={[160]}
-              sizes="160px"
-              formats={['webp']}
-              alt={copy === 0 && index < partnerLogos.length ? name : ''}
-              width={160}
-              loading={copy === 0 && index < partnerLogos.length ? 'eager' : 'lazy'}
-              decoding="async"
-            />
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              role="presentation"
+              aria-hidden="true"
+              focusable="false"
+              preserveAspectRatio="xMidYMid meet"
+            >
+              <use href={`#${logoId}`} xlink:href={`#${logoId}`} width="100%" height="100%" />
+            </svg>
           ))}
         </div>
       ))}
@@ -70,23 +163,60 @@ const tickerLogos = Array.from({ length: 4 }, () => partnerLogos).flat();
         <span>{ecosystem.axisStart}</span>
         <span>{ecosystem.axisEnd}</span>
       </div>
-      <div class="ecosystem-groups">
-        {ecosystem.groups.map((group) => (
-          <article class:list={['ecosystem-card', `ecosystem-card--${group.id}`]}>
-            <div class="ecosystem-card__top">
-              <span>{group.number}</span>
-              <span>{group.name}</span>
-            </div>
-            <BrandIcon name="parallelogram" className="ecosystem-card__mark" />
-            <div class="product-list">
-              {group.products.map((product) => (
-                <span class="product-chip">{product.name}</span>
+      <div class="ecosystem-carousel" role="region" aria-label="Productos del ecosistema">
+        <div class="ecosystem-carousel__track">
+          {[0, 1].map((copy) => (
+            <div class="ecosystem-carousel__group" aria-hidden={copy === 1 ? 'true' : undefined} inert={copy === 1}>
+              {productCards.map(({ group, groupIndex, product, description, keyPoints, review, reviewer }, cardIndex) => (
+                <a
+                  class:list={['ecosystem-card', `ecosystem-card--${group.id}`]}
+                  href={`#capability-${capabilityIds[groupIndex]}`}
+                  aria-label={`${product.name}. ${description} Ver capacidades de ${group.name}`}
+                  tabindex={copy === 1 ? -1 : undefined}
+                  draggable="false"
+                >
+                  <div class="ecosystem-card__visual">
+                    <Picture
+                      class="ecosystem-card__image"
+                      src={ecosystemCardImages[group.id]}
+                      formats={['webp']}
+                      widths={[360, 640, 960]}
+                      sizes="(max-width: 640px) 82vw, (max-width: 900px) 62vw, 54vw"
+                      alt=""
+                      width={1448}
+                      height={1086}
+                      loading="lazy"
+                      decoding="async"
+                      draggable="false"
+                    />
+                    <span class="ecosystem-card__number">{String(cardIndex + 1).padStart(2, '0')}</span>
+                    <span class="ecosystem-card__category">{group.name}</span>
+                  </div>
+                  <div class="ecosystem-card__body">
+                    <div class="ecosystem-card__rating" aria-label="Valoración simulada de 4.9 sobre 5">
+                      <span aria-hidden="true">★</span>
+                      <strong>4.9 / 5</strong>
+                      <small>VALORACIÓN DE MUESTRA</small>
+                    </div>
+                    <h3 class="ecosystem-card__product-name">{product.name}</h3>
+                    <p class="ecosystem-card__description">{description}</p>
+                    <div class="ecosystem-card__key-points">
+                      <h4>PUNTOS CLAVE</h4>
+                      <ul>
+                        {keyPoints.map((point) => <li>{point}</li>)}
+                      </ul>
+                    </div>
+                    <aside class="ecosystem-card__highlight">
+                      <span>RESEÑA SIMULADA</span>
+                      <blockquote>“{review}”</blockquote>
+                      <cite>{reviewer}</cite>
+                    </aside>
+                  </div>
+                </a>
               ))}
             </div>
-            <p>{group.description}</p>
-            {group.note && <small class="development-note">{group.note}</small>}
-          </article>
-        ))}
+          ))}
+        </div>
       </div>
       <p class="diagram-note">{ecosystem.diagramNote}</p>
     </div>
@@ -95,6 +225,8 @@ const tickerLogos = Array.from({ length: 4 }, () => partnerLogos).flat();
 
 <script>
   import { initializeEcosystemTicker } from '../../scripts/ecosystem-ticker';
+  import { initializeEcosystemCarousel } from '../../scripts/ecosystem-carousel';
 
   initializeEcosystemTicker();
+  initializeEcosystemCarousel();
 </script>

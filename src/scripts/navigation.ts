@@ -55,26 +55,11 @@ export function initializeNavigation(): void {
   });
 
   const links = [...menu.querySelectorAll<HTMLAnchorElement>('.main-navigation a:not(.button)')];
-  const sections = links
+  const destinations = links
     .map((link) => ({ link, section: document.querySelector<HTMLElement>(link.hash) }))
     .filter((entry): entry is { link: HTMLAnchorElement; section: HTMLElement } =>
       Boolean(entry.section),
     );
-  if ('IntersectionObserver' in window) {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (!entry.isIntersecting) continue;
-          for (const { link, section } of sections) {
-            if (section === entry.target) link.setAttribute('aria-current', 'location');
-            else link.removeAttribute('aria-current');
-          }
-        }
-      },
-      { rootMargin: '-90px 0px -45% 0px', threshold: 0 },
-    );
-    for (const { section } of sections) observer.observe(section);
-  }
 
   const floatingBackToTop = document.querySelector<HTMLAnchorElement>('.back-to-top--floating');
   const ecosystem = document.querySelector<HTMLElement>('#ecosystem');
@@ -88,42 +73,44 @@ export function initializeNavigation(): void {
     });
   }
 
-  if (floatingBackToTop && ecosystem) {
-    let framePending = false;
-    let previousScrollY = window.scrollY;
+  let framePending = false;
 
-    const updateBackToTop = () => {
-      framePending = false;
-      const currentScrollY = window.scrollY;
-      const scrollDelta = currentScrollY - previousScrollY;
+  const updateActiveNavigation = () => {
+    if (destinations.length === 0) return;
+    const activationLine = (siteHeader?.getBoundingClientRect().bottom ?? 0) + 24;
+    let activeDestination = destinations[0];
+
+    for (const destination of destinations) {
+      if (destination.section.getBoundingClientRect().top > activationLine) break;
+      activeDestination = destination;
+    }
+
+    for (const { link } of destinations) {
+      if (link === activeDestination.link) link.setAttribute('aria-current', 'location');
+      else link.removeAttribute('aria-current');
+    }
+  };
+
+  const updateScrollState = () => {
+    framePending = false;
+    if (floatingBackToTop && ecosystem) {
       const ecosystemTop = ecosystem.getBoundingClientRect().top;
       const isPastHero = ecosystemTop < window.innerHeight - 1;
-      const heroTransitionComplete = ecosystemTop <= 0;
 
       floatingBackToTop.classList.toggle('is-visible', isPastHero);
       floatingBackToTop.setAttribute('aria-hidden', String(!isPastHero));
       siteHeader?.classList.toggle('is-scrolled', isPastHero);
+    }
+    updateActiveNavigation();
+  };
 
-      if (siteHeader) {
-        const headerHasFocus = siteHeader.contains(document.activeElement);
-        if (!heroTransitionComplete || currentScrollY <= 0 || scrollDelta < -4 || headerHasFocus) {
-          siteHeader.classList.remove('is-hidden');
-        } else if (currentScrollY > 120 && scrollDelta > 4) {
-          siteHeader.classList.add('is-hidden');
-        }
-      }
+  const scheduleUpdate = () => {
+    if (framePending) return;
+    framePending = true;
+    window.requestAnimationFrame(updateScrollState);
+  };
 
-      previousScrollY = currentScrollY;
-    };
-    const scheduleUpdate = () => {
-      if (framePending) return;
-      framePending = true;
-      window.requestAnimationFrame(updateBackToTop);
-    };
-
-    window.addEventListener('scroll', scheduleUpdate, { passive: true });
-    window.addEventListener('resize', scheduleUpdate);
-    siteHeader?.addEventListener('focusin', () => siteHeader.classList.remove('is-hidden'));
-    updateBackToTop();
-  }
+  window.addEventListener('scroll', scheduleUpdate, { passive: true });
+  window.addEventListener('resize', scheduleUpdate);
+  updateScrollState();
 }

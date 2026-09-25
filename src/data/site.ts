@@ -2,8 +2,7 @@ import type { Capability, EcosystemGroup, JourneyStep, Product } from '../types/
 
 const productCatalog = {
   sorti: { name: 'Sorti' },
-  pan: { name: 'PAN' },
-  backoffice: { name: 'Backoffice' },
+  backoffice: { name: 'BackOffice' },
   sortiEngage: { name: 'SortiEngage' },
   zTickets: { name: 'ZTickets' },
   zPay: { name: 'ZPay' },
@@ -41,30 +40,27 @@ export const siteContent = {
     intro:
       'Una vista de las experiencias para jugadores, las herramientas de operación y las capacidades especializadas. La disponibilidad y las integraciones dependen de la configuración de cada operador.',
     mapLabel: 'Grupos de productos del ecosistema ZGames',
-    axisStart: 'Experiencia del jugador',
-    axisEnd: 'Capacidades de operación',
-    diagramNote: 'Los productos se muestran según su función en el ecosistema; la configuración puede variar según cada operador.',
     groups: [
       {
         id: 'players',
         number: '01',
         name: 'Jugadores',
         products: [productCatalog.sorti],
-        description: 'La experiencia para jugadores está en el centro del ecosistema.',
+        description: 'Experiencia de apuesta, juego y cuenta.',
       },
       {
         id: 'operation',
         number: '02',
         name: 'Operación',
-        products: [productCatalog.pan, productCatalog.backoffice],
-        description: 'Herramientas que apoyan las tareas diarias del operador.',
+        products: [productCatalog.backoffice],
+        description: 'Herramientas para operación y control.',
       },
       {
         id: 'engagement',
         number: '03',
         name: 'Interacción, soporte y pagos',
         products: [productCatalog.sortiEngage, productCatalog.zTickets, productCatalog.zPay],
-        description: 'Capacidades para interacción, boletería y pagos.',
+        description: 'Capacidades de crecimiento, atención y pagos.',
         note: 'ZPay está en desarrollo; las integraciones de pago dependen de la configuración del operador.',
       },
       {
@@ -72,7 +68,7 @@ export const siteContent = {
         number: '04',
         name: 'Análisis y soporte',
         products: [productCatalog.science365, productCatalog.center],
-        description: 'Capacidades de análisis y soporte dentro del ecosistema.',
+        description: 'Inteligencia, administración y finanzas.',
       },
     ],
   },
@@ -104,7 +100,7 @@ export const siteContent = {
       {
         number: '02',
         name: 'Herramientas de operación',
-        products: [productCatalog.pan, productCatalog.backoffice],
+        products: [productCatalog.backoffice],
         description: 'Capacidades para la gestión de la operación.',
       },
       {
